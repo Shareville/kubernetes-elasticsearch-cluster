@@ -15,6 +15,7 @@ spec:
         pod.beta.kubernetes.io/init-containers: '[
           {
           "name": "sysctl",
+            "imagePullPolicy": "Always",
             "image": "busybox",
             "command": ["sysctl", "-w", "vm.max_map_count=262144"],
             "securityContext": {
@@ -30,8 +31,8 @@ spec:
           capabilities:
             add:
               - IPC_LOCK
-        image: quay.io/pires/docker-elasticsearch-kubernetes:5.0.1_1
-        imagePullPolicy: Always
+        image: elastic8s
+        imagePullPolicy: IfNotPresent
         env:
         - name: NAMESPACE
           valueFrom:
